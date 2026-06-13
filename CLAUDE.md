@@ -2,12 +2,31 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Package management
+
+This project uses **uv** exclusively. Never use `pip` directly — always use `uv` commands.
+
 ## Commands
 
 ### Install
 
 ```bash
-pip install -e ".[dev,train]"
+uv sync --extra dev --extra train
+```
+
+To include Jupyter notebook support (examples in `examples/`):
+
+```bash
+uv sync --extra dev --extra train --extra notebooks
+jupyter lab
+```
+
+To add a new dependency:
+
+```bash
+uv add <package>                  # runtime dep
+uv add --dev <package>            # dev dep
+uv add --optional notebooks <package>  # notebooks extra
 ```
 
 ### Lint and Format
